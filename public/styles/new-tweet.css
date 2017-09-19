@@ -1,0 +1,37 @@
+.new-tweet {
+  background-color: #eee;
+  margin: 2em;
+  padding: 12px;
+  border-radius: 4px;
+}
+.new-tweet h2 {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  margin: 0 0 12px;
+}
+.new-tweet textarea {
+  width: 100%;
+  padding: 7px
+}
+.new-tweet textarea:focus {
+  outline: none;
+  border-color: #00a087;
+  box-shadow: 0 0 15px #00a087;
+}
+.new-tweet input {
+  border-radius: 4px;
+  border: 0;
+  padding: 4px 7px;
+  background-color: #00a087;
+  color: white;
+}
+.new-tweet input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00a087;
+}
+.new-tweet .counter {
+  float: right;
+  font-style: oblique;
+  line-height: 220%;
+  font-size: 90%;
+}
