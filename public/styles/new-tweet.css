@@ -25,9 +25,14 @@
   background-color: #00a087;
   color: white;
 }
+.new-tweet input:hover {
+  box-shadow: 0 7px 17px -4px #00a087;
+  -webkit-transform: scale(1.06);
+  transform: scale(1.06);
+}
 .new-tweet input:focus {
   outline: none;
-  box-shadow: 0 0 10px #00a087;
+  box-shadow: 0 0 17px #00a087;
 }
 .new-tweet .counter {
   float: right;

@@ -4,11 +4,13 @@
   border-radius: 4px;
 }
 .all-tweets header {
-  background: rgba(0, 160, 135, 0.25);
+  background: rgba(0, 160, 135, 0.3);
+  /*background: #00a087;*/
   padding: 12px;
   border-radius: 4px;
   display: flex;
   flex-direction: row;
+  opacity: 0.75;
 }
 .all-tweets header h2 {
   margin: 0;
@@ -39,6 +41,7 @@
 .all-tweets footer p {
   margin: 0;
   font-size: 90%;
+  color: #00a087;
 }
 .tweet-buttons i {
   padding: 0 2px;
