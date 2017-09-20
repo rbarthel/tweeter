@@ -11,14 +11,14 @@ module.exports = function makeDataHelpers(db) {
     saveTweet: function(newTweet, callback) {
       simulateDelay(() => {
         db.tweets.push(newTweet);
-        callback(null, true);
+        callback(null, newTweet);
       });
     },
 
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       simulateDelay(() => {
-        const sortNewestFirst = (a, b) => a.created_at - b.created_at;
+        const sortNewestFirst = (b, a) => a.created_at - b.created_at;
         callback(null, db.tweets.sort(sortNewestFirst));
       });
     }

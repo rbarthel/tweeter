@@ -56,28 +56,32 @@ $(function() {
 
   function loadTweets() {
     $.getJSON( '/tweets', function(tweets) {
-      const tweetsSorted = tweets.sort((b, a) => a.created_at - b.created_at);
-      renderTweets(tweetsSorted);
+      renderTweets(tweets);
     });
   }
 
-  loadTweets();
+  function renderSingleTweet(tweet) {
+    $('#tweets-container').prepend(createTweetElement(tweet));
+  }
 
-// when a user clicks the submit button, validate and then POST the tweet
+
+  // when a user clicks the submit button, validate and then POST the tweet
   $('.new-tweet').find('input').on('click', function(event) {
     event.preventDefault();
     const $tweetText = $(this).siblings('textarea');
     if (!$tweetText.val()) {
-      console.log('empty input');
       $('.submitError').text('You can\'t tweet nothing!');
     } else if ($tweetText[0].textLength > 140) {
-      console.log('too many chars');
       $('.submitError').text('Your tweet is too long!');
     } else {
+      $.post("/tweets", $tweetText.serialize(), (data) => { renderSingleTweet(data); });
       $('.submitError').text('');
-      $.post("/tweets", $tweetText.serialize());
+      $('.counter').text('140');
       $tweetText.val('');
     }
   });
+
+
+  loadTweets();
 
 });
