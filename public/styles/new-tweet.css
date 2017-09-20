@@ -32,6 +32,8 @@
 }
 .new-tweet input:focus {
   outline: none;
+}
+.new-tweet input:active {
   box-shadow: 0 0 17px #00a087;
 }
 .new-tweet .counter {
@@ -39,4 +41,7 @@
   font-style: oblique;
   line-height: 220%;
   font-size: 90%;
+}
+.new-tweet .submitError {
+  margin-left: 15px;
 }
