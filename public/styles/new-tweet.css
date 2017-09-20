@@ -3,6 +3,7 @@
   margin: 2em;
   padding: 12px;
   border-radius: 4px;
+  display: none;
 }
 .new-tweet h2 {
   border-bottom-style: solid;
@@ -24,6 +25,7 @@
   padding: 4px 7px;
   background-color: #00a087;
   color: white;
+  cursor: pointer;
 }
 .new-tweet input:hover {
   box-shadow: 0 7px 17px -4px #00a087;

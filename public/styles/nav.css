@@ -7,6 +7,8 @@
   top: 0;
   padding: 0 2em;
   z-index: 1;
+  display: flex;
+  align-items: center;
 }
 #nav-bar .logo {
  width: 80px;
@@ -16,5 +18,20 @@
  float: left;
  padding-left: 10px;
  font-size: 200%;
- line-height: 250%;
+}
+#nav-bar .compose {
+  margin-left: auto;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 0;
+  padding: 14px 17px;
+  background-color: #eee;
+}
+#nav-bar .compose:hover {
+  /*box-shadow: 0 7px 17px -4px #00a087;*/
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+#nav-bar .compose:focus {
+  outline: none;
 }

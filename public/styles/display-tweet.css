@@ -5,7 +5,6 @@
 }
 .display-tweet header {
   background: rgba(0, 160, 135, 0.4);
-  /*background: #00a087;*/
   padding: 12px;
   border-radius: 4px;
   display: flex;

@@ -64,6 +64,11 @@ $(function() {
     $('#tweets-container').prepend(createTweetElement(tweet));
   }
 
+  // show and hide the 'new tweet' box when the 'compose' button is clicked
+  $('.compose').on('click', function(){
+    $('.new-tweet').slideToggle();
+    $('.new-tweet').find('textarea').focus();
+  });
 
   // when a user clicks the submit button, validate and then POST the tweet
   $('.new-tweet').find('input').on('click', function(event) {
@@ -80,7 +85,6 @@ $(function() {
       $tweetText.val('');
     }
   });
-
 
   loadTweets();
 
