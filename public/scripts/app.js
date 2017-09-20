@@ -56,13 +56,14 @@ $(function() {
 
   function loadTweets() {
     $.getJSON( '/tweets', function(tweets) {
-      renderTweets(tweets);
+      const tweetsSorted = tweets.sort((b, a) => a.created_at - b.created_at);
+      renderTweets(tweetsSorted);
     });
   }
 
   loadTweets();
 
-  // when a user clicks the submit button, validate and then POST the tweet
+// when a user clicks the submit button, validate and then POST the tweet
   $('.new-tweet').find('input').on('click', function(event) {
     event.preventDefault();
     const $tweetText = $(this).siblings('textarea');
@@ -74,8 +75,8 @@ $(function() {
       $('.submitError').text('Your tweet is too long!');
     } else {
       $('.submitError').text('');
-      $tweetText.val('');
       $.post("/tweets", $tweetText.serialize());
+      $tweetText.val('');
     }
   });
 
