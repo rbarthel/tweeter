@@ -53,56 +53,6 @@ var data = [
   }
 ];
 
-  // just use moment
-
-  // function formatTimeAgo(createdAt) {
-
-  //   // get time ago in minutes
-  //   let timeDifference = (Date.now() - createdAt) / 60000;
-
-  //   if (timeDifference < 60) {
-  //     timeDifference = Math.floor(timeDifference);
-  //     if (timeDifference === 1) {
-  //       return timeDifference + ' minute ago';
-  //     } else {
-  //       return timeDifference + ' minutes ago';
-  //     }
-
-  //   }
-  //   if (timeDifference < 1440) {
-  //     timeDifference = Math.floor(timeDifference / 60);
-  //     if (timeDifference === 1) {
-  //       return timeDifference + ' hour ago';
-  //     } else {
-  //       return timeDifference + ' hours ago';
-  //     }
-  //   }
-  //   if (timeDifference < 43800) {
-  //     timeDifference = Math.floor(timeDifference / 1440);
-  //     if (timeDifference === 1) {
-  //       return timeDifference + ' day ago';
-  //     } else {
-  //       return timeDifference + ' days ago';
-  //     }
-  //   }
-  //   if (timeDifference < 525600) {
-  //     timeDifference = Math.floor(timeDifference / 43800);
-  //     if (timeDifference === 1) {
-  //       return timeDifference + ' month ago';
-  //     } else {
-  //       return timeDifference + ' months ago';
-  //     }
-  //   } else {
-  //     timeDifference = Math.floor(timeDifference / 525600);
-  //     if (timeDifference === 1) {
-  //       return timeDifference + ' year ago';
-  //     } else {
-  //       return timeDifference + ' years ago';
-  //     }
-  //   }
-  // }
-
-
   function createTweetElement(tweetData) {
     const $tweet = $('<section>').addClass('display-tweet');
 
@@ -122,7 +72,7 @@ var data = [
 
     $article.append($tweetText);
 
-    const $timeStamp = $('<p>').text(tweetData.created_at);
+    const $timeStamp = $('<p>').text(moment(tweetData.created_at).fromNow());
     const $tweetButtons = $('<span>').addClass('tweet-buttons');
 
     $footer.append($timeStamp).append($tweetButtons);
