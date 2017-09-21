@@ -56,7 +56,9 @@ $(function() {
 
   function loadTweets() {
     $.getJSON( '/tweets', function(tweets) {
-      renderTweets(tweets);
+      const sortNewestFirst = (b, a) => a.created_at - b.created_at;
+      const tweetsSorted = tweets.sort(sortNewestFirst);
+      renderTweets(tweetsSorted);
     });
   }
 
