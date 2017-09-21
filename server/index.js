@@ -7,6 +7,7 @@ const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
 
+
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 
@@ -30,6 +31,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 //
 // Because it exports a function that expects the `db` as a parameter, we can
 // require it and pass the `db` parameter immediately:
+
 const DataHelpers = require("./lib/data-helpers.js")(db);
 
 // The `tweets-routes` module works similarly: we pass it the `DataHelpers` object

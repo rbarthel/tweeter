@@ -1,9 +1,11 @@
-"use strict";
+// "use strict";
 
-const userHelper    = require("../lib/util/user-helper")
+const userHelper    = require("../lib/util/user-helper");
 
 const express       = require('express');
 const tweetsRoutes  = express.Router();
+
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(DataHelpers) {
 
@@ -14,6 +16,13 @@ module.exports = function(DataHelpers) {
       } else {
         res.json(tweets);
       }
+    });
+  });
+
+  tweetsRoutes.post("/delete", function(req, res) {
+    const deleteID = { _id: ObjectId(req.body.id) };
+    DataHelpers.deleteTweet(deleteID, (result) => {
+      res.status(201).json(result);
     });
   });
 
@@ -44,4 +53,4 @@ module.exports = function(DataHelpers) {
 
   return tweetsRoutes;
 
-}
+};

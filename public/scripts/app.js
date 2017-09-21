@@ -6,8 +6,31 @@
 
 $(function() {
 
+  function attachButtonHandlers() {
+    $('.fa-trash').on('click', function() {
+      const $displayTweet = $(this).closest('.display-tweet');
+      const tweetID = $displayTweet.data();
+      $.post('/tweets/delete', tweetID, function(result) {
+        $displayTweet.slideUp(function () {
+          $displayTweet.remove();
+        });
+      });
+    });
+    $('.fa-flag').on('click', function() {
+      const $displayError = $(this).closest('footer').find('.error-display');
+      $displayError.text('Don\'t be a snitch!').fadeIn(80).fadeOut(2000);
+    });
+    $('.fa-retweet').on('click', function() {
+      const tweetText = 'text=' + $(this).closest('.display-tweet').find('article').text();
+      const $displayError = $(this).closest('footer').find('.error-display');
+      $.post("/tweets", tweetText, (data) => { renderSingleTweet(data); });
+      $displayError.text('Retweeted!').fadeIn(80).fadeOut(2000);
+    });
+
+  }
+
   function createTweetElement(tweetData) {
-    const $tweet = $('<section>').addClass('display-tweet');
+    const $tweet = $('<section>').data("id", tweetData._id).addClass('display-tweet');
 
     const $header = $('<header>');
     const $article = $('<article>');
@@ -26,20 +49,24 @@ $(function() {
     $article.append($tweetText);
 
     const $timeStamp = $('<p>').text(moment(tweetData.created_at).fromNow());
+    const $displayError = $('<span>').addClass('error-display');
     const $tweetButtons = $('<span>').addClass('tweet-buttons');
 
-    $footer.append($timeStamp).append($tweetButtons);
+    $footer.append($timeStamp).append($displayError).append($tweetButtons);
 
+    const $buttonDelete = $('<i>').addClass('fa fa-trash');
     const $buttonFlag = $('<i>').addClass('fa fa-flag');
     const $buttonRetweet = $('<i>').addClass('fa fa-retweet');
     const $buttonLike = $('<i>').addClass('fa fa-heart');
 
-    $tweetButtons.append($buttonFlag).append($buttonRetweet).append($buttonLike);
+    $tweetButtons.append($buttonDelete).append($buttonFlag).append($buttonRetweet).append($buttonLike);
 
+    const $buttonDeleteTooltip = $('<span>').addClass('tooltiptext').text('Delete');
     const $buttonFlagTooltip = $('<span>').addClass('tooltiptext').text('Flag');
     const $buttonRetweetTooltip = $('<span>').addClass('tooltiptext').text('Retweet');
     const $buttonLikeTooltip = $('<span>').addClass('tooltiptext').text('Like');
 
+    $buttonDelete.append($buttonDeleteTooltip);
     $buttonFlag.append($buttonFlagTooltip);
     $buttonRetweet.append($buttonRetweetTooltip);
     $buttonLike.append($buttonLikeTooltip);
@@ -52,10 +79,11 @@ $(function() {
       const tweetHTML = createTweetElement(tweet);
       $('#tweets-container').append(tweetHTML);
     });
+    attachButtonHandlers();
   }
 
   function loadTweets() {
-    $.getJSON( '/tweets', function(tweets) {
+    $.getJSON( '/tweets', (tweets) => {
       const sortNewestFirst = (b, a) => a.created_at - b.created_at;
       const tweetsSorted = tweets.sort(sortNewestFirst);
       renderTweets(tweetsSorted);
@@ -64,6 +92,7 @@ $(function() {
 
   function renderSingleTweet(tweet) {
     $('#tweets-container').prepend(createTweetElement(tweet));
+    attachButtonHandlers();
   }
 
   // show and hide the 'new tweet' box when the 'compose' button is clicked

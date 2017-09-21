@@ -54,6 +54,7 @@
   display: inline-block;
   color: #00a087;
   visibility: hidden;
+  cursor: pointer;
 }
 .display-tweet:hover .tweet-buttons i {
   visibility: visible;
