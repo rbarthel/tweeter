@@ -7,13 +7,13 @@
 $(function() {
 
   function attachButtonHandlers() {
+    //unbind all handlers first to prevent dupliacation
+    $('.fa').off();
     $('.fa-trash').on('click', function() {
       const $displayTweet = $(this).closest('.display-tweet');
       const tweetID = $displayTweet.data();
-      $.post('/tweets/delete', tweetID, function(result) {
-        $displayTweet.slideUp(function () {
-          $displayTweet.remove();
-        });
+      $.post('/tweets/delete', tweetID, (result) => {
+        $displayTweet.slideUp( () => { $displayTweet.remove(); });
       });
     });
     $('.fa-flag').on('click', function() {
@@ -26,7 +26,15 @@ $(function() {
       $.post("/tweets", tweetText, (data) => { renderSingleTweet(data); });
       $displayError.text('Retweeted!').fadeIn(80).fadeOut(2000);
     });
-
+    $('.fa-heart').on('click', function() {
+      const $displayError = $(this).closest('footer').find('.error-display');
+      if ($(this).is('#liked')) {
+        $(this).attr('id', '');
+      } else {
+        $(this).attr('id', 'liked');
+        $displayError.text('Liked!').fadeIn(80).fadeOut(2000);
+      }
+    });
   }
 
   function createTweetElement(tweetData) {
@@ -75,7 +83,7 @@ $(function() {
   }
 
   function renderTweets(tweets) {
-    tweets.forEach(function(tweet){
+    tweets.forEach( (tweet) => {
       const tweetHTML = createTweetElement(tweet);
       $('#tweets-container').append(tweetHTML);
     });
@@ -96,15 +104,15 @@ $(function() {
   }
 
   // show and hide the 'new tweet' box when the 'compose' button is clicked
-  $('.compose').on('click', function(){
+  $('.compose').on('click', () => {
     $('.new-tweet').slideToggle();
     $('.new-tweet').find('textarea').focus();
   });
 
   // when a user clicks the submit button, validate and then POST the tweet
-  $('.new-tweet').find('input').on('click', function(event) {
+  $('.new-tweet').find('input').on('click', (event) => {
     event.preventDefault();
-    const $tweetText = $(this).siblings('textarea');
+    const $tweetText = $('.new-tweet').find('textarea');
     if (!$tweetText.val()) {
       $('.submitError').text('You can\'t tweet nothing!');
     } else if ($tweetText[0].textLength > 140) {
