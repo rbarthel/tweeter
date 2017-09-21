@@ -27,12 +27,19 @@ $(function() {
       $displayError.text('Retweeted!').fadeIn(80).fadeOut(2000);
     });
     $('.fa-heart').on('click', function() {
-      const $displayError = $(this).closest('footer').find('.error-display');
+      const $footer = $(this).closest('footer');
+      const tweetID = $(this).closest('.display-tweet').data();
       if ($(this).is('#liked')) {
         $(this).attr('id', '');
+        $footer.find('.likeCounter').html((i, val) => {return +val-1;});
+        tweetID.increment = -1;
+        $.post("/tweets/update", tweetID, (result) => {});
       } else {
         $(this).attr('id', 'liked');
-        $displayError.text('Liked!').fadeIn(80).fadeOut(2000);
+        $footer.find('.likeCounter').html((i, val) => {return +val+1;});
+        $footer.find('.error-display').text('Liked!').fadeIn(80).fadeOut(2000);
+        tweetID.increment = 1;
+        $.post("/tweets/update", tweetID, (result) => {});
       }
     });
   }
@@ -66,8 +73,9 @@ $(function() {
     const $buttonFlag = $('<i>').addClass('fa fa-flag');
     const $buttonRetweet = $('<i>').addClass('fa fa-retweet');
     const $buttonLike = $('<i>').addClass('fa fa-heart');
+    const $likeCounter = $('<i>').addClass('likeCounter').text(tweetData.likes);
 
-    $tweetButtons.append($buttonDelete).append($buttonFlag).append($buttonRetweet).append($buttonLike);
+    $tweetButtons.append($buttonDelete).append($buttonFlag).append($buttonRetweet).append($buttonLike).append($likeCounter);
 
     const $buttonDeleteTooltip = $('<span>').addClass('tooltiptext').text('Delete');
     const $buttonFlagTooltip = $('<span>').addClass('tooltiptext').text('Flag');

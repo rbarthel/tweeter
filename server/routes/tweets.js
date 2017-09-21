@@ -26,6 +26,14 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.post("/update", function(req, res) {
+    const updateID = { _id: ObjectId(req.body.id) };
+    const updateBody = { $inc: { 'likes': Number(req.body.increment) } };
+    DataHelpers.updateTweet(updateID, updateBody, (result) => {
+      res.status(201).json(result);
+    });
+  });
+
   tweetsRoutes.post("/", function(req, res) {
 
     if (!req.body.text) {
@@ -39,7 +47,8 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      likes: 0
     };
 
     DataHelpers.saveTweet(tweet, (err, tweet) => {

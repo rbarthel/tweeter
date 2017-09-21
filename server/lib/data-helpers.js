@@ -15,6 +15,13 @@ module.exports = function makeDataHelpers(db) {
       db.collection("tweets").find().toArray(callback);
     },
 
+    updateTweet: function(tweetID, update, callback) {
+      db.collection("tweets").updateOne(tweetID, update, function(err, result) {
+        if (err) throw err;
+        callback('success');
+      });
+    },
+
     deleteTweet: function(tweetID, callback) {
       db.collection("tweets").remove(tweetID, function(err, result) {
         if (err) throw err;
