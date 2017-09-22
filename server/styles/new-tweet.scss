@@ -1,0 +1,49 @@
+.new-tweet {
+  h2 {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin: 0 0 12px;
+  }
+  textarea {
+    &:focus {
+    outline: none;
+    border-color: #00a087;
+    box-shadow: 0 0 15px #00a087;
+    }
+    width: 100%;
+    padding: 7px
+  }
+  input {
+    &:hover {
+      box-shadow: 0 7px 17px -4px #00a087;
+      -webkit-transform: scale(1.06);
+      transform: scale(1.06);
+    }
+    &:focus {
+      outline: none;
+    }
+    &:active {
+      box-shadow: 0 0 17px #00a087;
+    }
+    border-radius: 4px;
+    border: 0;
+    padding: 4px 7px;
+    background-color: #00a087;
+    color: white;
+    cursor: pointer;
+  }
+  .counter {
+    float: right;
+    font-style: oblique;
+    line-height: 220%;
+    /*font-size: 90%;*/
+  }
+  .submitError {
+    margin-left: 8px;
+  }
+  background-color: #eee;
+  margin: 2em;
+  padding: 12px;
+  border-radius: 4px;
+  display: none;
+}

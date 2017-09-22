@@ -1,0 +1,81 @@
+#liked {
+  color: red;
+}
+.display-tweet {
+  header {
+    h2 {
+      margin: 0;
+      padding-left: 10px;
+    }
+    p {
+      margin-left: auto;
+    }
+    img {
+      height: 60px;
+      border-radius: 4px;
+      border-style: solid;
+      border-width: 1px;
+      border-color: black;
+    }
+    background: rgba(0, 160, 135, 0.4);
+    padding: 12px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    opacity: 0.75;
+  }
+  &:hover {
+    header {
+      opacity: 1;
+    }
+    .tweet-buttons i {
+      visibility: visible;
+    }
+  }
+  article {
+    p {
+      margin: 0;
+      font-size: 120%;
+    }
+    padding: 20px 15px;
+  }
+  footer {
+    p {
+      margin: 0;
+      font-size: 90%;
+      color: #00a087;
+    }
+    border-top-style: solid;
+    border-top-width: 1px;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  background-color: #eee;
+  margin: 2em;
+  border-radius: 4px;
+}
+.tweet-buttons {
+  .tooltiptext {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    color: #00a087;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    top: 200%;
+    left: -20%;
+  }
+  i {
+    &:hover .tooltiptext {
+      visibility: visible;
+    }
+    padding: 0 2px;
+    position: relative;
+    display: inline-block;
+    color: #00a087;
+    visibility: hidden;
+    cursor: pointer;
+  }
+}
