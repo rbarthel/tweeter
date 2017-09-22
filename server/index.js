@@ -6,12 +6,26 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+const path          = require('path');
+const sass          = require('node-sass');
+const sassMiddlware = require('node-sass-middleware');
+const MongoClient   = require("mongodb").MongoClient;
+const MONGODB_URI   = "mongodb://localhost:27017/tweeter";
 
-
-const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+// sass.render({file: './public/styles/layout.css'}, function(err, result) {
+//   console.log('err: ' + err);
+//   console.log('result: ' + JSON.stringify(result));
+//   fs.writeFile('./public/styles/', result.css);
+// });
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(sassMiddlware({
+  src: path.resolve(__dirname, "../server/"),
+  dest: path.resolve(__dirname, "../public/"),
+  response: false,
+  debug: true
+
+}));
 app.use(express.static("public"));
 
 // const db = require("./lib/in-memory-db");
