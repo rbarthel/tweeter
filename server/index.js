@@ -12,19 +12,11 @@ const sassMiddlware = require('node-sass-middleware');
 const MongoClient   = require("mongodb").MongoClient;
 const MONGODB_URI   = "mongodb://localhost:27017/tweeter";
 
-// sass.render({file: './public/styles/layout.css'}, function(err, result) {
-//   console.log('err: ' + err);
-//   console.log('result: ' + JSON.stringify(result));
-//   fs.writeFile('./public/styles/', result.css);
-// });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sassMiddlware({
   src: path.resolve(__dirname, "../server/"),
   dest: path.resolve(__dirname, "../public/"),
-  response: false,
-  debug: true
-
+  response: false
 }));
 app.use(express.static("public"));
 

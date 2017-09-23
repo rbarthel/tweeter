@@ -129,4 +129,14 @@ $(function() {
 
   loadTweets();
 
+  //detect if a user interacts with the page with a touchscreen, and modify hover and other elements accordingly
+  window.addEventListener('touchstart', function() {
+    const $tweetButtons = $('.tweet-buttons').find('i');
+    $tweetButtons.css('visibility', 'visible');
+    $tweetButtons.css('font-size', '150%');
+    $('header').css('opacity', 1);
+    $('.tooltiptext').remove('.tooltiptext');
+
+  });
+
 });
